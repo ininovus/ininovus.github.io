@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Builder 채용 방향성 제안서</title>
@@ -1255,5 +1256,140 @@
 
 })();
 </script>
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chrome 키오스크 설정</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 24px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #888;
+      margin-bottom: 32px;
+      letter-spacing: 0.04em;
+    }
+
+    .copy-box {
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 16px;
+      padding: 36px 44px;
+      max-width: 900px;
+      width: 100%;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+      position: relative;
+      text-align: center;
+    }
+
+    .copy-box:hover {
+      border-color: #4a90d9;
+      box-shadow: 0 4px 24px rgba(74, 144, 217, 0.12);
+    }
+
+    .copy-box:active {
+      transform: scale(0.985);
+    }
+
+    .copy-box .text {
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: #222;
+      word-break: break-all;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .hint {
+      margin-top: 28px;
+      font-size: 0.85rem;
+      color: #aaa;
+      transition: opacity 0.3s;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #333;
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .copy-box { padding: 24px 20px; }
+      .copy-box .text { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Chrome 브라우저 설정</h1>
+
+  <div class="copy-box" id="copyBox">
+    <div class="text" id="copyText">--kiosk --disable-pinch --disable-features=TouchpadOverscrollHistoryNavigation,OverscrollHistoryNavigation,PasswordManagerOnboarding</div>
+  </div>
+
+  <p class="hint">클릭 또는 터치하면 클립보드에 복사됩니다</p>
+
+  <div class="toast" id="toast">✅ 클립보드에 복사되었습니다</div>
+
+  <script>
+    const box = document.getElementById('copyBox');
+    const text = document.getElementById('copyText').textContent.trim();
+    const toast = document.getElementById('toast');
+    let timer;
+
+    box.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      showToast();
+    });
+
+    function showToast() {
+      clearTimeout(timer);
+      toast.classList.add('show');
+      timer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+  </script>
+
+>>>>>>> f59a0f8 (update page)
 </body>
 </html>
